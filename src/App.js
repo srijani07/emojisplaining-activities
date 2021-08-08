@@ -18,12 +18,15 @@ const activityDictionary = {
   "🏸": "Badminton",
   "🥊": "Boxing Glove"
 };
-
 var activityList = Object.keys(activityDictionary);
 export default function App() {
-  var [meaning, setMeaning] = useState(" ");
+  var [meaning, setMeaning] = useState("");
   function inputChangeHandler(event) {
-    meaning = activityDictionary[event.target.value];
+    var word = event.target.value;
+    if (word in activityList === false)
+      meaning = "Sorry, we do not have this in our database.";
+    else meaning = activityDictionary[word];
+
     setMeaning(meaning);
   }
   function clickHandler(item) {
@@ -34,7 +37,10 @@ export default function App() {
     <div className="App">
       <h1>emojisplained</h1>
       <input onChange={inputChangeHandler} />
-      <div> {meaning} </div>
+      <div>
+        {" "}
+        <br /> {meaning}{" "}
+      </div>
       <ul>
         {activityList.map(function (item) {
           return (
