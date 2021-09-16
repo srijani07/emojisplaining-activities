@@ -23,9 +23,10 @@ export default function App() {
   var [meaning, setMeaning] = useState("");
   function inputChangeHandler(event) {
     var word = event.target.value;
-    if (word in activityList === false)
+    meaning = activityDictionary[word];
+    if (meaning === undefined) {
       meaning = "Sorry, we do not have this in our database.";
-    else meaning = activityDictionary[word];
+    } 
 
     setMeaning(meaning);
   }
